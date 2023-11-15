@@ -26,7 +26,7 @@ public class Employee {
 	private String empGen;
 
 	@Column(name = "esal")
-	private String empSal;
+	private Double empSal;
 
 	@Column(name = "edept")
 	private String empDept;
