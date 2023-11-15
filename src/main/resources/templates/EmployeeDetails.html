@@ -86,8 +86,10 @@
             Page</a>
     </div>
     <div class="container-fluid d-flex gap-4 mt-5 p-3 flex-wrap overflow-auto">
-        <div class="card shadow p-2" style="height: 300px; width: 300px;" th:each="emp:${empList}">
+        <div class="card shadow p-1" style="height: 300px; width: 300px;" th:each="emp:${empList}">
             <div class="card-body">
+                <div class="">
+                </div>
                 <div class="row">
                     <div class="col-6">
                         <img class="img-thumbnail"
@@ -95,7 +97,7 @@
                             alt="">
                     </div>
                     <div class="col-6">
-                        <p class="card-title text-warning-emphasis">[[${emp.empName}]]</p>
+                        <h6 class="card-title text-warning-emphasis">[[${emp.empName}]]</h6>
                         <p class="card-text">[[${emp.empSal}]]</p>
                         <p class="card-text">[[${emp.empDept}]]</p>
                         <p class="card-text">[[${emp.empAddr}]]</p>
@@ -105,6 +107,7 @@
             </div>
             <div class="card-footer">
                 <a th:href="@{/employee/edit(empId=${emp.empId})}">Edit</a>
+                <a th:href="@{/employee/delete(empId=${emp.empId})}"  onclick="return confirm('Are you sure?')">Delete</a>
             </div>
         </div>
     </div>

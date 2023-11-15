@@ -102,12 +102,12 @@
                 <h3>Employee Registration Form</h3>
             </div>
             <div class="card-body">
-                <form th:action="@{/employee/saveEmp}" method="post" th:object="${employee}">
+                <form th:action="@{/employee/saveEmp}" method="post" th:object="${employee}" id="empForm">
                     <div class="row gap-4">
                         <input type="hidden" th:field="*{empId}" id="">
                         <div class="col-4">
                             <label for="">Enter Name</label> <input class="form-control" type="text"
-                                th:field="*{empName}" id="empName">
+                                th:field="*{empName}" id="">
                         </div>
                         <div class="col-3">
                             <label for="">Enter Gender</label>
@@ -145,6 +145,114 @@
         </div>
     </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        //Form validation
+        $().ready(
+            function () {
+
+                $.validator
+                    .addMethod(
+                        "pwcheck",
+                        function (value) {
+                            return /^[A-Za-z0-9\d=!\-@._*]*$/
+                                .test(value) // consists of only these
+                                && /[a-z]/.test(value) // has a lowercase letter
+                                && /[A-Z]/.test(value) // has a Upper letter
+                                && /\d/.test(value) // has a digit
+                                && /^(?=.*[@#$%&])/
+                                    .test(value)// has a special symbole
+                        },
+                        "Password must contain one capital letter, one small letter,one numerical and one special character");
+
+                // Add custom validation method for select tag
+                $.validator.addMethod('valueNotEquals', function (
+                    value, element, param) {
+                    return param !== value;
+                }, 'Please select an option');
+
+                $("#empForm")
+                    .validate(
+                        {
+                            rules: {
+                                empName: "required",
+                                mobile: {
+                                    required: true,
+                                    digits: true,
+                                    rangelength: [10, 10],
+                                },
+                                email: {
+                                    required: true,
+                                    email: true,
+                                },
+                                gender: "required",
+                                dob: "required",
+                                department: {
+                                    required: true,
+                                    valueNotEquals: "-1",
+                                },
+                                country: {
+                                    required: true,
+                                    valueNotEquals: "-1",
+                                },
+                                state: {
+                                    required: true,
+                                    valueNotEquals: "-1",
+                                },
+                                district: {
+                                    required: true,
+                                    valueNotEquals: "-1",
+                                },
+
+                            },
+                            messages: {
+                                empName: "Please Enter User Name",
+
+                                mobile: {
+                                    required: "Please enter phone no",
+                                    digits: "must be digits only",
+                                    rangelength: "Enter a 10 digits valid phone no"
+                                },
+                                email: {
+                                    required: "please enter email id",
+                                    email: "Enter a valid Email",
+                                },
+                                gender: "Please choose your gender",
+                                dob: "please select date",
+                                department: {
+                                    required: "Please select an Option",
+                                    valueNotEquals: "Please select an Deparment",
+                                },
+                                country: {
+                                    required: "Please select an Option",
+                                    valueNotEquals: "Please select Country",
+                                },
+                                state: {
+                                    required: "Please select an Option",
+                                    valueNotEquals: "Please  State",
+                                },
+                                district: {
+                                    required: "Please select an Option",
+                                    valueNotEquals: "Please select District",
+                                },
+
+                            }
+                        });
+
+            }
+        );
+    </script>
 
 
 </body>

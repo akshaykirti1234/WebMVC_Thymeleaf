@@ -34,7 +34,7 @@ public class EmployeeController {
 		System.out.println(employee);
 		Integer id = employeeService.saveEmployee(employee);
 		attributes.addFlashAttribute("msg", "Register Successfull with id " + id);
-		return "redirect:./register";
+		return "redirect:./showAllEmp";
 	}
 
 	// 3. get all rows amd display in html
@@ -46,6 +46,12 @@ public class EmployeeController {
 	}
 
 	// 4. Delete based on Id
+	@GetMapping("/delete")
+	public String delete(@RequestParam Integer empId, RedirectAttributes redirectAttributes) {
+		employeeService.deleteEmployee(empId);
+		return "redirect:./showAllEmp";
+
+	}
 
 	// 5.Show data in edit page
 	@GetMapping("/edit")
@@ -55,5 +61,4 @@ public class EmployeeController {
 		return "redirect:./register";
 	}
 
-	// 6.Update on Edit Form submit
 }
