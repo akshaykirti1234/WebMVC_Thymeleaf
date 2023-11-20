@@ -31,13 +31,12 @@ public class EmployeeController {
 	// 2. Read Form data and insert in DB
 	@PostMapping("/saveEmp")
 	public String saveEmp(@ModelAttribute Employee employee, RedirectAttributes attributes) {
-		System.out.println(employee);
 		Integer id = employeeService.saveEmployee(employee);
 		attributes.addFlashAttribute("msg", "Register Successfull with id " + id);
-		return "redirect:./showAllEmp";
+		return "redirect:./register";
 	}
 
-	// 3. get all rows amd display in html
+	// 3. get all rows and display in Html
 	@GetMapping("/showAllEmp")
 	public String showAllEmp(Model model) {
 		List<Employee> empList = employeeService.getAllEmployees();
